@@ -149,7 +149,7 @@ static volatile uint8_t button_current_clicks = 0;
 /* FIXME */
 static volatile bool button_cleared_credentials = false;
 
-#if Wiring_SetupButtonUX
+#if HAL_PLATFORM_SETUP_BUTTON_UX
 
 namespace {
 
@@ -270,7 +270,7 @@ void system_handle_button_clicks(bool isIsr)
     button_final_clicks = 0;
 }
 
-#endif // #if Wiring_SetupButtonUX
+#endif // #if HAL_PLATFORM_SETUP_BUTTON_UX
 
 void reset_button_click()
 {
@@ -280,7 +280,7 @@ void reset_button_click()
     if (clicks > 0) {
         system_notify_event(button_final_click, clicks, nullptr, nullptr, nullptr, NOTIFY_SYNCHRONOUSLY);
         button_final_clicks = clicks;
-#if Wiring_SetupButtonUX
+#if HAL_PLATFORM_SETUP_BUTTON_UX
         // Certain numbers of clicks can be processed directly in ISR
         system_handle_button_clicks(HAL_IsISR());
 #endif
