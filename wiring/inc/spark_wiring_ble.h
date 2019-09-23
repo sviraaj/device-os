@@ -598,6 +598,9 @@ public:
     BlePeerDevice connect(const BleAddress& addr, const BleConnectionParams* params, bool automatic = true) const;
     BlePeerDevice connect(const BleAddress& addr, uint16_t interval, uint16_t latency, uint16_t timeout, bool automatic = true) const;
     BlePeerDevice connect(const BleAddress& addr, bool automatic = true) const;
+
+    const Vector<BlePeerDevice>& getAllPeers() const;
+
     // This only disconnect the peer Central device, i.e. when the local device is acting as BLE Peripheral.
     int disconnect() const;
     int disconnect(const BlePeerDevice& peer) const;

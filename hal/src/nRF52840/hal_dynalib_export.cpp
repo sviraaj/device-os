@@ -41,6 +41,7 @@
 #include "hal_dynalib_cellular.h"
 #include "hal_dynalib_ble.h"
 #include "hal_dynalib_nfc.h"
+#include "hal_dynalib_usr_fs.h"
 
 #ifndef HAL_USB_EXCLUDE
 #include "hal_dynalib_usb.h"

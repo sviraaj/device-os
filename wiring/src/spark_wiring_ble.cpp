@@ -802,8 +802,8 @@ public:
         if (charImpl.callback_) {
             callback_ = charImpl.callback_;
             context_ = charImpl.context_;
-            charImpl.callback_ = nullptr;
-            charImpl.context_ = nullptr;
+            //charImpl.callback_ = nullptr;
+            //charImpl.context_ = nullptr;
         }
     }
 
@@ -2003,6 +2003,10 @@ int BleLocalDevice::disconnectAll() const {
         p.disconnect();
     }
     return SYSTEM_ERROR_NONE;
+}
+
+const Vector<BlePeerDevice>& BleLocalDevice::getAllPeers() const {
+    return impl()->peers();
 }
 
 BleCharacteristic BleLocalDevice::addCharacteristic(const BleCharacteristic& characteristic) {

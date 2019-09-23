@@ -1550,13 +1550,13 @@ void BleObject::Observer::processObserverEvents(const ble_evt_t* event, void* co
             break;
         }
         case BLE_GAP_EVT_TIMEOUT: {
-            if (event->evt.gap_evt.params.timeout.src == BLE_GAP_TIMEOUT_SRC_SCAN) {
+            //if (event->evt.gap_evt.params.timeout.src == BLE_GAP_TIMEOUT_SRC_SCAN) {
                 LOG_DEBUG(TRACE, "BLE GAP event: Scanning timeout");
                 if (observer->isScanning_) {
                     observer->isScanning_ = false;
                     os_semaphore_give(observer->scanSemaphore_, false);
                 }
-            }
+            //}
             break;
         }
         default: {
