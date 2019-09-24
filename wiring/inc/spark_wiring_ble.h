@@ -507,6 +507,8 @@ public:
 
     BlePeerDevice& operator=(const BlePeerDevice& peer);
 
+    BleConnectionHandle& connHandle() const;
+
     BlePeerDeviceImpl* impl() const {
         return impl_.get();
     }

@@ -1695,9 +1695,13 @@ bool BleObject::ConnectionsManager::connected(const hal_ble_addr_t* address) {
 }
 
 int BleObject::ConnectionsManager::connect(const hal_ble_conn_cfg_t* config, hal_ble_conn_handle_t* connHandle) {
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_TRUE(connections_.size() < BLE_MAX_LINK_COUNT, SYSTEM_ERROR_LIMIT_EXCEEDED);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_TRUE(config, SYSTEM_ERROR_INVALID_ARGUMENT);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_TRUE(connHandle, SYSTEM_ERROR_INVALID_ARGUMENT);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     // Stop scanning first to give the scanning semaphore if possible.
     CHECK(BleObject::getInstance().observer()->stopScanning());
     SCOPE_GUARD ({
@@ -1708,12 +1712,16 @@ int BleObject::ConnectionsManager::connect(const hal_ble_conn_cfg_t* config, hal
     ble_gap_conn_params_t bleGapConnParams = {};
     if (config->conn_params == nullptr) {
         int ret = sd_ble_gap_ppcp_get(&bleGapConnParams);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
         CHECK_NRF_RETURN(ret, nrf_system_error(ret));
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     } else {
         bleGapConnParams = toPlatformConnParams(config->conn_params);
     }
     int ret = sd_ble_gap_connect(&bleDevAddr, &bleGapScanParams, &bleGapConnParams, BLE_CONN_CFG_TAG);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_NRF_RETURN(ret, nrf_system_error(ret));
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     isConnecting_ = true;
     memcpy(&connectingAddr_, &config->address, sizeof(hal_ble_addr_t));
     if (os_semaphore_take(connectSemaphore_, BLE_OPERATION_TIMEOUT_MS, false)) {
@@ -1721,7 +1729,9 @@ int BleObject::ConnectionsManager::connect(const hal_ble_conn_cfg_t* config, hal
         return SYSTEM_ERROR_TIMEOUT;
     }
     BleConnection* connection = fetchConnection(&config->address);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_TRUE(connection, SYSTEM_ERROR_INTERNAL);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     connection->handler.callback = config->callback;
     connection->handler.context = config->context;
     *connHandle = connection->info.conn_handle;
@@ -3704,8 +3714,11 @@ int hal_ble_gap_stop_scan(void* reserved) {
 
 int hal_ble_gap_connect(const hal_ble_conn_cfg_t* config, hal_ble_conn_handle_t* conn_handle, void* reserved) {
     BleLock lk;
-    LOG_DEBUG(TRACE, "hal_ble_gap_connect().");
+    LOG_DEBUG(ERROR, "hal_ble_gap_connect().");
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
     CHECK_TRUE(BleObject::getInstance().initialized(), SYSTEM_ERROR_INVALID_STATE);
+    LOG(ERROR, "%s, %d", __func__, __LINE__);
+    LOG_DEBUG(ERROR, "hal_ble_gap_connect2().");
     return BleObject::getInstance().connMgr()->connect(config, conn_handle);
 }
 
