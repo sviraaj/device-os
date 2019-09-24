@@ -1573,10 +1573,6 @@ BleAddress BlePeerDevice::address() const {
     return impl()->address();
 }
 
-BleConnectionHandle& BlePeerDevice::connHandle() const  {
-    return impl()->connHandle();
-}
-
 bool BlePeerDevice::operator==(const BlePeerDevice& device) const {
     if (impl()->connHandle() == device.impl()->connHandle() && address() == device.address()) {
         return true;
