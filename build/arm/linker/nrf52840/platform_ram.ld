@@ -64,12 +64,12 @@ _user_part_static_ram_end = _stack_start;
 _user_part_static_ram_start = _user_part_static_ram_end - _user_part_static_ram_size;
 
 /* SoftDevice */
-_softdevice_ram_size = 38K;
+_softdevice_ram_size = 40K;
 _softdevice_ram_start = _ram_start;
 _softdevice_ram_end = _softdevice_ram_start + _softdevice_ram_size;
 
 /* System part 1 */
-_system_part1_static_ram_size = 90K;
+_system_part1_static_ram_size = 88K;
 _system_part1_static_ram_start = _softdevice_ram_end;
 _system_part1_static_ram_end = _system_part1_static_ram_start + _system_part1_static_ram_size;
 
